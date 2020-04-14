@@ -52,7 +52,7 @@ class DefaultGetEstimator(Resource):
     return estimator(request.get_json(force=True)), 200
 
 def writeResponseLines():
-  return '\n'.join(['{method}  {path}       {status}  {duration}ms'.format(method=elt['method'], path=elt['path'], status=elt['status'], duration="{0:0=2d}".format(elt['duration'])) for elt in readRequestsLogs()])
+  return '\n'.join(['{method} {path} {status} {duration}ms'.format(method=elt['method'], path=elt['path'], status=elt['status'], duration="{0:0=2d}".format(elt['duration'])) for elt in readRequestsLogs()])
 
 
 class GetEstimatorLogs(Resource):
