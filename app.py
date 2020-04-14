@@ -5,7 +5,7 @@ import json
 from flask import Flask, request, g
 from flask_restful import Api
 
-from resources.request_estimator import GetEstimator, DefaultGetEstimator, GetEstimatorLogs, update_requests_logs
+from resources.request_estimator import GetEstimator, DefaultGetEstimator, GetEstimatorLogs, updateRequestsLogs
 
 app = Flask(__name__)
 api = Api(app)
@@ -30,7 +30,7 @@ def after_request_func(response):
      # Get elapsed time in milliseconds
     elapsed = time.time() - g.request_start_time
     elapsed = int(round(1000 * elapsed))
-    update_requests_logs(dict(method=request.method, path=request.path, status=response.status_code, duration=elapsed))
+    updateRequestsLogs(dict(method=request.method, path=request.path, status=response.status_code, duration=elapsed))
     return response
 
 if __name__ == "__main__":

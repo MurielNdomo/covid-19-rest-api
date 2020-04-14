@@ -7,7 +7,7 @@ import json
 
 
 
-def read_requests_logs():
+def readRequestsLogs():
   """ Opens saved_logs json file and return existing requests logs as list or empty list"""
   with open("saved_logs.json", "r+") as logs:
         try:
@@ -20,9 +20,9 @@ def read_requests_logs():
             data = [data]
         return data
 
-def update_requests_logs(request_details):
+def updateRequestsLogs(request_details):
   """ append new request to requests logs file"""
-  existing_requests = read_requests_logs()
+  existing_requests = readRequestsLogs()
   with open("saved_logs.json", "r+") as logs:
     existing_requests.append(request_details)
     # to reset the file pointer to position 0 
@@ -52,7 +52,7 @@ class DefaultGetEstimator(Resource):
     return estimator(request.get_json(force=True)), 200
 
 def writeResponseLines():
-  return '\n'.join(['{method}  {path}       {status}  {duration}ms'.format(method=elt['method'], path=elt['path'], status=elt['status'], duration=elt['duration']) for elt in read_requests_logs()])
+  return '\n'.join(['{method}  {path}       {status}  {duration}ms'.format(method=elt['method'], path=elt['path'], status=elt['status'], duration=elt['duration']) for elt in readRequestsLogs()])
 
 
 class GetEstimatorLogs(Resource):
